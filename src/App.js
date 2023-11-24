@@ -1,22 +1,28 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
 
 function App() {
+  const [text, setText] = useState('');
+
+  const flipText = () => {
+    const flipped = text.split('').reverse().join('');
+    setText(flipped);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Upside Down Text Generator</h1>
+        <div>
+          <input
+            type="text"
+            placeholder="Enter text"
+            value={text}
+            onChange={(e) => setText(e.target.value)} // As you're changing it shows the flipped text
+          />
+          <button onClick={flipText}>Flip</button>
+        </div>
+        <p className={text ? 'upside-down' : ''}>{text}</p>
       </header>
     </div>
   );
